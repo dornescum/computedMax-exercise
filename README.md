@@ -1,1 +1,1 @@
-# computedMax-exercise
+# computedVueMax-exercise
