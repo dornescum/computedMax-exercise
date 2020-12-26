@@ -3,7 +3,38 @@ const app = Vue.createApp({
         return {
             counter: 0,
             name: '',
+            fullname: '',
+            lastName: ''
         };
+    },
+    watch: {
+        // ================================================================
+        // watch este indicat pt hhtp request, sau pt actiuni  care se vor updata in dom
+        // =======================================================================
+        counter (value){
+            if (value > 50 || value < -50){
+                const that = this
+                setTimeout(()=> {
+                    that.counter = 0;
+                }, 2000)
+            }
+        },
+        // recomandat sa fol acc nume cu argumetele din data()
+        name(value){
+            if (value === ''){
+                this.fullname = '';
+            } else {
+                this.fullname = value; // dar value este by defalut
+            }
+            // this.fullname= this.name() + 'scharzmuller' \\ se poate scrie si asa
+        },
+        lastName(value){
+            if (value === ''){
+                this.fullname = '';
+            } else {
+                this.fullname = this.name + " " + value;
+            }
+        }
     },
     computed: {
         // dc este in computed nu mai nevoie in html {{ fullName FARA()!!}}
@@ -12,7 +43,7 @@ const app = Vue.createApp({
             if (this.name === '') {
                 return '';
             }
-            return this.name + ' ' + 'Orice';
+            return this.name + ' ' + this.lastName;
         }
     },
     methods: {
@@ -34,7 +65,8 @@ const app = Vue.createApp({
             // this.counter--;
         },
         resetInput() {
-            this.name = '';
+            this.name = ''
+            this.lastName = ''
         },
     },
 });
